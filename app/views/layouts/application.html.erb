@@ -10,7 +10,7 @@
 
     <%= yield :head %>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.conditional.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css">
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
@@ -27,24 +27,31 @@
 
   <body class="pico">
     <header>
-      <div class="container">
+      <div class="container-two-thirds">
         <nav>
           <ul>
-            <li><a href="/">
+            <li>
+              <a href="/">
                 <strong>Bulletin Board</strong>
-              </a></li>
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
     </header>
+
     <main>
-      <div class="container">
+      <div class="container-two-thirds">
+        <div class="text-success">
+          <%= notice %>
+        </div>
+        
         <%= yield %>
       </div>
     </main>
 
     <footer class="text-center">
-      AppDeev 2025. All right reserved.
+      AppDev 2025. All rights reserved.
     </footer>
   </body>
 </html>

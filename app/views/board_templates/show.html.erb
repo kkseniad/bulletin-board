@@ -1,15 +1,26 @@
+<% the_id = params.fetch("path_id") %>
+
+<% matching_boards = Board.where({ :id => the_id }) %>
+
+<% the_board = matching_boards.at(0) %>
+
 <nav aria-label="breadcrumb">
   <ul>
     <li><a href="/">Home</a></li>
-    <li><%= @the_board.name %></li>
+    <li><%= the_board.name %></li>
   </ul>
 </nav>
-<% all_listings = Listing.where({ :id => @the_board.id })%>
-<% active_listings = all_listings.where({ :expires_on => (Date.today...) })%>
+
+<% all_listings = Listing.where({ :board_id => the_id }) %>
+
+<% active_listings = all_listings.where({ :expires_on => (Date.today...) }) %>
 
 <article>
-  <header>Active Listings</header>
-  <div style="overflow-x: scroll">
+  <header>
+    Active listings
+  </header>
+
+  <div class="overflow-auto">
     <table>
       <thead>
         <th>Title</th>
@@ -18,21 +29,37 @@
         <th>Posted on</th>
       </thead>
 
-      <% active_listings.each do |a_listing|%>
+      <% active_listings.each do |a_listing| %>
         <tr>
-          <td><%= a_listing.title %></td>
-          <td><%= a_listing.body %></td>
-          <td><%= a_listing.expires_on.strftime("%b %e, %Y") %></td>
-          <td><%= a_listing.created_at.strftime("%b %e, %Y") %></td>
+          <td>
+            <%= a_listing.title %>
+          </td>
+
+          <td>
+            <%= a_listing.body %>
+          </td>
+
+          <td>
+            <%= a_listing.expires_on.strftime("%b %e, %Y") %>
+          </td>
+
+          <td>
+            <%= a_listing.created_at.strftime("%b %e, %Y") %>
+          </td>
         </tr>
       <% end %>
     </table>
   </div>
 </article>
 
+<% expired_listings = all_listings.where({ :expires_on => (...Date.today) }) %>
+
 <article>
-  <header>Expired listings</header>
-  <div style="overflow-x: scroll">
+  <header>
+    Expired listings
+  </header>
+
+  <div class="overflow-auto">
     <table>
       <thead>
         <th>Title</th>
@@ -41,13 +68,23 @@
         <th>Posted on</th>
       </thead>
 
-      <% expired_listings = all_listings.where({ :expires_on => (...Date.today) })%>
-      <% expired_listings.each do |a_listing|%>
+      <% expired_listings.each do |a_listing| %>
         <tr>
-          <td><%= a_listing.title %></td>
-          <td><%= a_listing.body %></td>
-          <td><%= a_listing.expires_on.strftime("%b %e, %Y") %></td>
-          <td><%= a_listing.created_at.strftime("%b %e, %Y") %></td>
+          <td>
+            <%= a_listing.title %>
+          </td>
+
+          <td>
+            <%= a_listing.body %>
+          </td>
+
+          <td>
+            <%= a_listing.expires_on.strftime("%b %e, %Y") %>
+          </td>
+
+          <td>
+            <%= a_listing.created_at.strftime("%b %e, %Y") %>
+          </td>
         </tr>
       <% end %>
     </table>
