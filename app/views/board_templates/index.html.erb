@@ -1,8 +1,13 @@
-<h1>Hello World!</h1>
-<ul>
-  <% @list_of_boards.each do |board| %>
-    <li>
-      <%= board.name %>
-    </li>
-  <% end %>
-</ul>
+<h1>Home</h1>
+<article>
+  <header>All boards</header>
+  <ul>
+    <% @list_of_boards.each do |a_board| %>
+      <li>
+        <a href="/boards/<%= a_board.id %>">
+          <%= a_board.name %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</article>
